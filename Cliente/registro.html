@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar sticky-top navbar-dark bg-primary">
+            <a class="navbar-brand" href="validate.php">
+                <img src="img/newspaper_32.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                My News Cover
+            </a>
+        </nav>
+    </header>
+    <div class="col-12 ">
+        <section class="main row py-5 ">
+            <div class="container move pt-5 ">
+                <h1>Registro de Usuarios</h1>
+                <hr>
+            </div>
+        </section>
+    </div>
+    <section class="col-12 section px-5 pb-5">
+        <div class="row">
+            <div class="col-md-12 text-center ">
+                <form class="container">
+                    <div class="row ">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="md-form form-group">
+                                <input name="nombre" id="nombre" class="form-control mb-1" type="text" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="md-form form-group">
+                                <input name="apellido" id="apellido" class="form-control" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="md-form form-group">
+                             <input name="email" id="email" class="form-control mb-1" type="email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="md-form form-group">
+                                <input name="usuario" id="usuario" class="form-control mb-1" type="text" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="md-form form-group">
+                                <input name="contra" id="contra" class="form-control" type="password" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group py-3">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Registrar"> </input>
+                        <input type="reset" name="cancel" class="btn btn-danger"
+                            onclick="window.location.href='index.php'" value="Cancelar"> </input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer class="text-center text-white " style="background-color: #0b63b6;">
+        <div class="container p-3 pb-0">
+            <section class="">
+                <p class="d-flex justify-content-center align-items-center">
+                    <span class="mr-3"> Si ya tienes una cuenta logeate aquí</span>
+                    <button type="button" onclick="window.location.href='index.php'"
+                        class="btn btn-outline-light btn-rounded ml-1 ">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar Sesion 
+                    </button>
+                </p>
+            </section>
+            <a class="text-white" href="https://mdbootstrap.com/">mynewscover.com</a>
+        </div>
+    </footer>
+</body>
+</html>
