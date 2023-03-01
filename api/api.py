@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 import secrets
+from controlador.roles import CL_Roles
+
 
 app = Flask(__name__)
 app.secret_key = '7ca057fab5edfb90831da61d0c3cc5bd'
@@ -15,6 +17,12 @@ def page_not_authorization(e):
 @app.route("/")
 def root():
     return ('Fuentes de noticias')
+
+#Prueba de conexion
+@app.route("/prueba/", methods=['GET'])
+def prueba():
+    print(CL_Roles().prueba())
+    return CL_Roles().prueba()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002)
