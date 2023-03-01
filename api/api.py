@@ -24,5 +24,11 @@ def prueba():
     print(CL_Roles().prueba())
     return CL_Roles().prueba()
 
+#Prueba de conexion
+@app.route("/noticias/", methods=['GET'])
+def prueba2():
+    print(CL_Roles().prueba2())
+    return CL_Roles().prueba2()
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002)
