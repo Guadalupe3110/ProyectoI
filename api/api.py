@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for, session
 import secrets
 from controlador.roles import CL_Roles
-
+from controlador.fuentes_noticias import CL_FuentesNoticias
 
 app = Flask(__name__)
 app.secret_key = '7ca057fab5edfb90831da61d0c3cc5bd'
@@ -29,6 +29,10 @@ def prueba():
 def prueba2():
     print(CL_Roles().prueba2())
     return CL_Roles().prueba2()
+
+@app.route("/xml/", methods=['GET'])
+def xml():
+    return CL_FuentesNoticias().xml()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002)
