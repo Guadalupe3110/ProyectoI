@@ -15,3 +15,12 @@ class CL_UsuarioDB:
         usuario['id'] = usu
         usuario['Usuario'] = usuario
         return usuario
+    
+    def FN_Login(self, email, contrasena):
+        query = "SELECT u.*, r.* FROM Users as u  INNER JOIN Roles AS r ON u.idRoles  = r.idRoles WHERE u.email = %s AND u.password = %s"
+        val = (email, contrasena)
+        self.data = CL_Conexion().get_DB_value(query, val)
+        resultado = []
+        for result in self.data:
+            resultado.append(self.data[result])
+        return resultado
