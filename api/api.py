@@ -4,6 +4,7 @@ from controlador.roles import CL_Roles
 from controlador.fuentes_noticias import CL_FuentesNoticias
 from controlador.usuarios import CL_Usuario
 from modelo.db_usuarios import CL_UsuarioDB
+from controlador.categorias import CL_Categorias
 import json
 app = Flask(__name__)
 app.secret_key = '7ca057fab5edfb90831da61d0c3cc5bd'
@@ -58,6 +59,15 @@ def roles():
     return json_data
 
 ###########################################################################################################################################
+#CATEGORIAS
+#Función que utiliza el get para el obtener todas las categorias 
+@app.route("/categorias/", methods=['GET'])
+def categorias():
+    print(session['user'])
+    return CL_Categorias().FN_ObtenerCategorias()
+
+###########################################################################################################################################
+
 
 @app.route("/xml/", methods=['GET'])
 def xml():
