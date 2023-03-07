@@ -63,8 +63,12 @@ def roles():
 #Función que utiliza el get para el obtener todas las categorias 
 @app.route("/categorias/", methods=['GET'])
 def categorias():
-    print(session['user'])
     return CL_Categorias().FN_ObtenerCategorias()
+
+#Función que utiliza el post para el registro de una categoria en la base de datos
+@app.route("/categoria/", methods=['POST'])
+def categoria():
+    return CL_Categorias().FN_InsertarCategoria()
 
 ###########################################################################################################################################
 

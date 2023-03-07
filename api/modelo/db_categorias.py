@@ -7,3 +7,15 @@ class CL_CategoriasDB:
         sql = "select * FROM Categories"
         self.data = CL_Conexion().get_DB(sql)
         return self.data
+    
+    #Funcion para crear nueva categoria
+    def FN_NuevaCategoria(self, categoria):
+        categoria = categoria['Categoria']
+        query = """INSERT INTO Categories 
+				(name) 
+				VALUES (%s)"""
+        val = (categoria['name'],)
+        cat = CL_Conexion().set_DB(query, val)
+        categoria['id'] = cat
+        categoria['Categoria'] = categoria
+        return categoria
