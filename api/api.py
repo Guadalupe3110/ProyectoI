@@ -3,6 +3,7 @@ import secrets
 from controlador.roles import CL_Roles
 from controlador.fuentes_noticias import CL_FuentesNoticias
 from controlador.usuarios import CL_Usuario
+from modelo.db_usuarios import CL_UsuarioDB
 import json
 app = Flask(__name__)
 app.secret_key = '7ca057fab5edfb90831da61d0c3cc5bd'
@@ -25,6 +26,26 @@ def root():
 @app.route("/usuario/", methods=['POST'])
 def usuario():
     return CL_Usuario().FN_Usuario()
+
+#Acá al poner url, dirige al login
+@app.route("/session/drop")
+def session_drop():
+    session.pop('user', None)
+    return redirect(url_for('login'))
+
+#Función que verifica el correo y contraseña al loguearse en la base de datos
+@app.route('/login/', methods=['POST'])
+def login():
+    if request.method == 'POST':
+            contenido = request.get_json(force = True)
+            session.pop('user', None)
+            validar_sesion = CL_UsuarioDB().FN_Login(contenido['email'], contenido['password'])
+            if validar_sesion != False:
+                session['user']  = validar_sesion
+    if 'user' in session:
+        return "200 OK: Inicio de sesión correctamente"
+    return "error"
+
 
 ###########################################################################################################################################
 #ROLES
