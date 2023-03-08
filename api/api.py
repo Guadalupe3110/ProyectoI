@@ -70,6 +70,11 @@ def categorias():
 def categoria():
     return CL_Categorias().FN_InsertarCategoria()
 
+#Función que utiliza el delete para el eliminar una categoria en la base de datos
+@app.route("/categoria/<id>/", methods=['GET','PATCH'])
+def categoria_modificar(id):
+    return CL_Categorias().FN_ModificarCategoria(id)
+
 ###########################################################################################################################################
 
 
