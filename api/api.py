@@ -61,10 +61,11 @@ def login():
     return "error"
 
 # Función protegida por JWT que solo es accesible si se proporciona un token de acceso válido
-@app.route('/protected', methods=['GET'])
+@app.route('/protected/', methods=['GET'])
 @jwt_required()
 def protected():
     user_id = get_jwt_identity()
+    print(jsonify(logged_in_as=user_id))
     return jsonify(logged_in_as=user_id), 200
 
 ###########################################################################################################################################
