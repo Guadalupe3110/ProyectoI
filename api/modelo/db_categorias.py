@@ -35,3 +35,10 @@ class CL_CategoriasDB:
         CL_Conexion().set_DB(query, val)
         categoria['Categoria']['idCategories'] = id
         return categoria
+    
+     #Funcion para eliminar categoria
+    def FN_EliminarCategoria(self, id):
+        query = "DELETE FROM Categories WHERE id = %s"
+        val = (id, )
+        CL_Conexion().set_DB(query, val)
+        return True

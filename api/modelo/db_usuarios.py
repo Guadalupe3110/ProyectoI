@@ -1,17 +1,13 @@
 from modelo.conexion import CL_Conexion
-import hashlib
-import secrets
 class CL_UsuarioDB:
 
     #Insertar en la base de datos un nuevo usuario
     def FN_NuevoUsuario(self,usuario):
         usuario = usuario['Usuario']
-        usuario['token'] = secrets.token_hex(16)
-        usuario['token'] = hashlib.md5(usuario['token'].encode())
         query = """INSERT INTO Users 
-				(email, first_name, last_name, idRoles, password, token) 
-				VALUES (%s, %s, %s, %s, %s, %s)"""
-        val = (usuario['email'],usuario['first_name'],usuario['last_name'],usuario['idRoles'],usuario['password'],usuario['token'].hexdigest())
+				(email, first_name, last_name, idRoles, password) 
+				VALUES (%s, %s, %s, %s, %s)"""
+        val = (usuario['email'],usuario['first_name'],usuario['last_name'],usuario['idRoles'],usuario['password'])
         usu = CL_Conexion().set_DB(query, val)
         usuario['id'] = usu
         usuario['Usuario'] = usuario
