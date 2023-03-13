@@ -54,7 +54,7 @@ def login():
                 access_token = create_access_token(identity=validar_sesion['idUsers'], expires_delta=timedelta(days=1))
                 validar_sesion['token'] = access_token
                 session['user']  = validar_sesion
-                #Modificar el token en la base de datos
+                CL_Usuario().FN_ModificarToken(validar_sesion)
                 return jsonify({'access_token': access_token, 'user_id': validar_sesion['idUsers']})
     if 'user' in session:
         return "200 OK: Inicio de sesión correctamente"

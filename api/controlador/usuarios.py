@@ -17,3 +17,6 @@ class CL_Usuario:
             return res
         else:
             return "Token invalido"
+        
+    def FN_ModificarToken(self, usuario):
+        return CL_UsuarioDB().FN_ModificarUsuario(usuario)
