@@ -94,6 +94,11 @@ def categoria():
 def categoria_modificar(id):
     return CL_Categorias().FN_ModificarCategoria(id)
 
+#Función que utiliza el get para saber si una categoria esta relacionadad a una fuente de noticia o noticia en la base de datos
+@app.route("/verificarcategoria/<id>/", methods=['GET'])
+def verficar_categoria_eliminar(id):
+    return CL_Categorias().FN_VerificarEliminar(id)
+
 #Función que utiliza el delete para el eliminar una categoria en la base de datos
 @app.route("/categoria/<id>/", methods=['DELETE'])
 def categoria_eliminar(id):

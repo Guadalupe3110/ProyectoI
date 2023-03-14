@@ -49,6 +49,21 @@ class CL_Categorias:
         else:
             return "Token invalido"
         
+
+    def FN_VerificarEliminar(self, id):
+        token = request.headers.get('token')
+        if (token == "7ca057fab5edfb90831da61d0c3cc5bd"):
+            if session['user']['idRoles'] == 1:
+                categoria = CL_CategoriasDB().FN_VerificarEliminarCategoria(id)#Eliminar categoria en base de datos 
+                if(categoria):
+                    res = "No puede"
+                else:
+                    res = "Puede"
+                return res
+            else:
+                return "Usuario sin permisos"
+        else:
+            return "Token invalido"
     
     #Moficiar ategoria en la base de datos    
     def FN_EliminarCategoria(self, id):

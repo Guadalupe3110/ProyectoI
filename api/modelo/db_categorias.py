@@ -36,9 +36,18 @@ class CL_CategoriasDB:
         categoria['Categoria']['idCategories'] = id
         return categoria
     
+    #Verifica si una una noticia o fuente de noticia esta relacionada a una categoria
+    def FN_VerificarEliminarCategoria(self, id):
+        sql = "SELECT c.* FROM Categories c INNER JOIN News AS n ON c.idCategories = n.idCategories INNER JOIN NewsSources AS ns ON c.idCategories = ns.idCategories WHERE c.idCategories = %s"
+        val = (id,)
+        self.data = CL_Conexion().get_DB_value(sql, val)
+        if len(self.data) != 0:
+            return True
+        return False
+
      #Funcion para eliminar categoria
     def FN_EliminarCategoria(self, id):
-        query = "DELETE FROM Categories WHERE id = %s"
+        query = "DELETE FROM Categories WHERE idCategories = %s"
         val = (id, )
         CL_Conexion().set_DB(query, val)
         return True

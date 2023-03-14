@@ -22,9 +22,9 @@ class CL_UsuarioDB:
             return self.data[0]
         return False
     
+    #Modifica el token del usuario
     def FN_ModificarUsuario(self, usuario):
         query = "UPDATE Users SET token = %s WHERE idUsers = %s"
         val = (usuario['token'], usuario['idUsers'])
-        print(val)
         CL_Conexion().set_DB(query, val)
         return True
