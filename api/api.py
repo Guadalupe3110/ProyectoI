@@ -2,17 +2,21 @@ from flask import Flask, render_template, request, send_from_directory, redirect
 from flask_jwt import JWT, jwt_required, current_identity
 import secrets
 from datetime import timedelta
+import json
+import datetime
+from flask_cors import CORS
+from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from controlador.roles import CL_Roles
 from controlador.fuentes_noticias import CL_FuentesNoticias
 from controlador.usuarios import CL_Usuario
 from modelo.db_usuarios import CL_UsuarioDB
 from controlador.categorias import CL_Categorias
-import json
-import datetime
-from flask_jwt import JWT, jwt_required, current_identity
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+from controlador.fuentes_noticias import CL_FuentesNoticias
 
 app = Flask(__name__)
+#Middleware CORS
+CORS(app)
 app.secret_key = '7ca057fab5edfb90831da61d0c3cc5bd'
 app.config['JWT_SECRET_KEY'] = '123456' # Agregas la clave secreta
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=1)
@@ -105,7 +109,33 @@ def categoria_eliminar(id):
     return CL_Categorias().FN_EliminarCategoria(id)
 
 ###########################################################################################################################################
+#NEWS SOURCES
 
+#Función que utiliza el get para el obtener todas las fuentes de noticias 
+@app.route("/fuentes/", methods=['GET'])
+def fuentes():
+    return CL_FuentesNoticias().FN_ObtenerFuentes()
+
+#Función que utiliza el post para el registro de una categoria en la base de datos
+@app.route("/fuentes/", methods=['POST'])
+def fuente():
+    return CL_FuentesNoticias().FN_InsertarFuente()
+
+#Función que utiliza el delete para el eliminar una categoria en la base de datos
+@app.route("/fuentes/<id>/", methods=['GET','PATCH'])
+def fuente_modificar(id):
+    return CL_FuentesNoticias().FN_ModificarFuente(id)
+
+#Función que utiliza el get para saber si una fuente de noticia puede ser o no eliminada
+@app.route("/verificarfuente/<id>/", methods=['GET'])
+def verficar_fuente_eliminar(id):
+    return CL_FuentesNoticias().FN_VerificarEliminar(id)
+
+#Función que utiliza el delete para el eliminar una fuente de noticia en la base de datos
+@app.route("/fuente/<id>/", methods=['DELETE'])
+def fuente_eliminar(id):
+    return CL_FuentesNoticias().FN_EliminarFuente(id)
+###########################################################################################################################################
 
 
 
