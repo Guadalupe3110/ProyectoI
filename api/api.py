@@ -47,30 +47,36 @@ def session_drop():
     session.pop('user', None)
     return redirect(url_for('login'))
 
-#Función que verifica el correo y contraseña al loguearse en la base de datos
 @app.route('/login/', methods=['POST'])
 def login():
     if request.method == 'POST':
-            contenido = request.get_json(force = True)
-            session.pop('user', None)
-            validar_sesion = CL_UsuarioDB().FN_Login(contenido['email'], contenido['password'])
-            if validar_sesion != False:
-                access_token = create_access_token(identity=validar_sesion['idUsers'], expires_delta=timedelta(days=1))
-                validar_sesion['token'] = access_token
-                session['user']  = validar_sesion
-                CL_Usuario().FN_ModificarToken(validar_sesion)
-                return jsonify({'access_token': access_token, 'user_id': validar_sesion['idUsers']})
+        contenido = request.get_json(force = True)
+        session.pop('user', None)
+        validar_sesion = CL_UsuarioDB().FN_Login(contenido['email'], contenido['password'])
+        if validar_sesion:
+            access_token = create_access_token(identity=validar_sesion['idUsers'], expires_delta=timedelta(days=1))
+            validar_sesion['token'] = access_token
+            session['user']  = validar_sesion
+            CL_Usuario().FN_ModificarToken(validar_sesion)
+            return jsonify({'access_token': access_token, 'user_id': validar_sesion['idUsers']}), 200
+        else:
+            return "Usuario o contraseña incorrectos", 401
     if 'user' in session:
-        return "200 OK: Inicio de sesión correctamente"
-    return "error"
+        return "200 OK: Inicio de sesión correctamente", 200
+    else:
+        return "Error del servidor", 500
+
 
 # Función protegida por JWT que solo es accesible si se proporciona un token de acceso válido
 @app.route('/protected/', methods=['GET'])
 @jwt_required()
 def protected():
-    user_id = get_jwt_identity()
-    print(jsonify(logged_in_as=user_id))
-    return jsonify(logged_in_as=user_id), 200
+    try:
+        user_id = get_jwt_identity()
+        return jsonify(logged_in_as=user_id), 200
+    except:
+        return "Unauthorized", 401
+
 
 ###########################################################################################################################################
 #ROLES
@@ -78,8 +84,12 @@ def protected():
 #Función para obtener todos los roles de usuario
 @app.route("/roles/", methods=['GET'])
 def roles():
-    json_data = json.dumps(CL_Roles().FN_ObtenerRoles())
-    return json_data
+    roles = CL_Roles().FN_ObtenerRoles()
+    if roles:
+        json_data = json.dumps(roles)
+        return json_data, 200
+    else:
+        return "No se encontraron roles", 204
 
 ###########################################################################################################################################
 #CATEGORIAS
