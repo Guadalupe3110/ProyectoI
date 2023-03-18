@@ -84,12 +84,7 @@ def protected():
 #Función para obtener todos los roles de usuario
 @app.route("/roles/", methods=['GET'])
 def roles():
-    roles = CL_Roles().FN_ObtenerRoles()
-    if roles:
-        json_data = json.dumps(roles)
-        return json_data, 200
-    else:
-        return "No se encontraron roles", 204
+    return CL_Roles().FN_ObtenerRoles()
 
 ###########################################################################################################################################
 #CATEGORIAS
