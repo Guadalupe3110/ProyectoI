@@ -1,18 +1,9 @@
 from modelo.db_fuentes_noticias import CL_FuentesNoticiasDB
 from flask import request, session
 import xml.etree.ElementTree as ET
-import xmltodict
-import requests
 import json
 
 class CL_FuentesNoticias:
-
-    #Lee el rss a xml
-    def xml(self):
-        xml= xmltodict.parse(requests.get('https://www.lanacion.com.ar/arcio/rss/').text)
-        print(xml['rss']['channel']['item'][0]['category'])
-        #print(xml['rss'])
-        return xml
     
     #Retorna todas las fuentes de noticias
     def FN_ObtenerFuentes(self):
