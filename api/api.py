@@ -13,6 +13,7 @@ from controlador.usuarios import CL_Usuario
 from modelo.db_usuarios import CL_UsuarioDB
 from controlador.categorias import CL_Categorias
 from controlador.fuentes_noticias import CL_FuentesNoticias
+from controlador.noticias import CL_Noticias
 
 app = Flask(__name__)
 #Middleware CORS
@@ -141,12 +142,20 @@ def verficar_fuente_eliminar(id):
 def fuente_eliminar(id):
     return CL_FuentesNoticias().FN_EliminarFuente(id)
 ###########################################################################################################################################
+#NEWS
+
+#Función qpara insertar la noticia
+@app.route("/noticia/", methods=['POST'])
+def noticia():
+    return CL_Noticias().FN_InsertarNoticia()
 
 
-
+###########################################################################################################################################
+#XML
 @app.route("/xml/", methods=['GET'])
 def xml():
     return CL_FuentesNoticias().xml()
+###########################################################################################################################################
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002)

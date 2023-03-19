@@ -11,12 +11,12 @@ class CL_Usuario:
             respuesta = {"Usuario": contenido}
             respuesta = CL_UsuarioDB().FN_NuevoUsuario(respuesta)#Insertar usuario en base de datos 
             if(len(respuesta) != 0):
-                res = "200 OK: Usuario creado con exito"
+                res = "201 OK: Usuario creado con exito", 201
             else:
-                res = "Error 400"
+                res = "Error 400", 400
             return res
         else:
-            return "Token invalido"
+            return "Token invalido", 401
         
     def FN_ModificarToken(self, usuario):
         return CL_UsuarioDB().FN_ModificarUsuario(usuario)
