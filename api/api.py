@@ -148,11 +148,24 @@ def fuente_eliminar(id):
 @app.route("/noticia/", methods=['POST'])
 def noticia():
     return CL_Noticias().FN_InsertarNoticia()
+
+#Obtiene las noticas del usuario
+@app.route("/noticias/", methods=['GET'])
+def noticias():
+    return CL_Noticias().FN_ObtenerNoticiasUsuario()
+
+#Obtiene las noticias del usuario por categoria
+@app.route("/noticiascategoria/<id>/", methods=['GET'])
+def noticiasCategoria(id):
+    return CL_Noticias().FN_ObtenerNoticiasUsuarioCategoria(id)
+
 ###########################################################################################################################################
 #XML
 @app.route("/xml/", methods=['GET'])
 def xml():
     return CL_FuentesNoticias().xml()
+
+
 ###########################################################################################################################################
 
 if __name__ == "__main__":

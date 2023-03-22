@@ -11,7 +11,8 @@ class CL_FuentesNoticias:
         if fuentes:
             json_data = json.dumps(fuentes)
             return json_data, 200
-    
+        else:
+            return "sin datos", 204
 
     #Funcion para intertar fuente de noticia
     def FN_InsertarFuente(self):

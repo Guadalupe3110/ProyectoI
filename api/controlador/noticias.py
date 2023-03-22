@@ -3,6 +3,7 @@ from modelo.db_fuentes_noticias import CL_FuentesNoticiasDB
 from flask import request, session
 import xmltodict
 import requests
+import json
 
 class CL_Noticias:
     
@@ -42,3 +43,21 @@ class CL_Noticias:
         }
         respuesta = {"Noticia": new}
         return respuesta
+    
+    #Retorna las noticias de usuario logueado
+    def FN_ObtenerNoticiasUsuario(self):
+        noticias = CL_NoticiasDB().FN_ObtenerNoticiaUsuario()
+        if len(noticias) != 0:
+            json_data = json.dumps(noticias)
+            return json_data, 200
+        else:
+            return "sin datos", 204
+        
+    #Retorna las noticias de usuario logueado por categoria
+    def FN_ObtenerNoticiasUsuarioCategoria(self, idCategoria):
+        noticias = CL_NoticiasDB().FN_ObtenerNoticiaUsuarioCategoria(idCategoria)
+        if len(noticias) != 0:
+            json_data = json.dumps(noticias)
+            return json_data, 200
+        else:
+            return "sin datos", 204
