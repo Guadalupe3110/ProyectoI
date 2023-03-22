@@ -18,7 +18,7 @@ class CL_Noticias:
             contenido = request.get_json(force = True)
             new = self.FN_ObtenerInfo(contenido)
             respuesta = CL_NoticiasDB().FN_NuevaNoticia(new)#Insertar noticia en base de datos 
-            if(len(respuesta) != 0):
+            if(respuesta):
                 res = "201 OK: Noticia creada con exito", 201
             else:
                 res = "Error 400", 400
@@ -28,15 +28,16 @@ class CL_Noticias:
         
     #Obtiene la informacion necesaria para insertar noticia
     def FN_ObtenerInfo(self, contenido):
-        fuente = CL_FuentesNoticiasDB().FN_ObtenerFuenteID(contenido['idNewsSource'])
+        fuente = CL_FuentesNoticiasDB().FN_ObtenerFuenteID(contenido['idNewsSource'])[0]
         noticiaXML = self.xml(fuente['url'])
-        new = { 'title': noticiaXML['rss']['channel']['item']['title'],
-               'short_description': noticiaXML['rss']['channel']['item']['description'],
-               'permanlink': noticiaXML['rss']['channel']['item']['link'],
-               'date': noticiaXML['rss']['channel']['item']['pubDate'],
+        print(noticiaXML['rss']['channel']['item'][0])
+        new = { 'title': noticiaXML['rss']['channel']['item'][0]['title'],
+               'short_description': noticiaXML['rss']['channel']['item'][0]['description'],
+               'permanlink': noticiaXML['rss']['channel']['item'][0]['link'],
+               'date': noticiaXML['rss']['channel']['item'][0]['pubDate'],
                'idNewsSource': contenido['idNewsSource'],
                'idUsers': session['user']['idUsers'],
-               'idCategories': contenido['idCategories']
+               'idCategories': fuente['idCategories']
 
         }
         respuesta = {"Noticia": new}

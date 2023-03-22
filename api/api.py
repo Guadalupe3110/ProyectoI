@@ -148,8 +148,6 @@ def fuente_eliminar(id):
 @app.route("/noticia/", methods=['POST'])
 def noticia():
     return CL_Noticias().FN_InsertarNoticia()
-
-
 ###########################################################################################################################################
 #XML
 @app.route("/xml/", methods=['GET'])
