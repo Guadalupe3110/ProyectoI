@@ -39,7 +39,6 @@ def root():
 #Función que utiliza el post para el registro de un usuario en la base de datos
 @app.route("/usuario/", methods=['POST'])
 def usuario():
-    print(session['user'])
     return CL_Usuario().FN_Usuario()
 
 #Acá al poner url, dirige al login

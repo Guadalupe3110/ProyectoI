@@ -4,8 +4,8 @@ class CL_UsuarioDB:
 
     #Insertar en la base de datos un nuevo usuario
     def FN_NuevoUsuario(self,usuario):
-        contrasena = hashlib.md5(usuario['password'].encode())
         usuario = usuario['Usuario']
+        contrasena = hashlib.md5(usuario['password'].encode())
         query = """INSERT INTO Users 
 				(email, first_name, last_name, idRoles, password) 
 				VALUES (%s, %s, %s, %s, %s)"""
