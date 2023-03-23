@@ -31,7 +31,6 @@ class CL_Noticias:
     def FN_ObtenerInfo(self, contenido):
         fuente = CL_FuentesNoticiasDB().FN_ObtenerFuenteID(contenido['idNewsSource'])[0]
         noticiaXML = self.xml(fuente['url'])
-        print(noticiaXML['rss']['channel']['item'][0])
         new = { 'title': noticiaXML['rss']['channel']['item'][0]['title'],
                'short_description': noticiaXML['rss']['channel']['item'][0]['description'],
                'permanlink': noticiaXML['rss']['channel']['item'][0]['link'],
