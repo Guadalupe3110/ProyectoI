@@ -28,7 +28,7 @@ def page_not_authorization(e):
     # note that we set the 401 status explicitly
     return render_template('Errors/401.html'), 401
 
-#Al correr kafka inicia por esta función esperando una ruta para iniciar el sistema
+#Al correr el sistema inicia por esta función esperando una ruta para iniciar el sistema
 @app.route("/")
 def root():
     return ('Fuentes de noticias')

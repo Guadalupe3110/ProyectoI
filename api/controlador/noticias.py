@@ -38,7 +38,6 @@ class CL_Noticias:
                'idNewsSource': contenido['idNewsSource'],
                'idUsers': session['user']['idUsers'],
                'idCategories': fuente['idCategories']
-
         }
         respuesta = {"Noticia": new}
         return respuesta
